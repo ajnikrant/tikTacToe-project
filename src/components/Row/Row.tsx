@@ -3,7 +3,7 @@ import { Cell } from '../Cell';
 
 export function Row() {
   return (
-    <div>
+    <div className='flex flex-row'>
         <Cell />
         <Cell />
         <Cell />

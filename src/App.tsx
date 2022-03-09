@@ -5,7 +5,7 @@ import {PlayerO} from './components/PlayerO';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <PlayerX />
       <Board />
       <PlayerO />
