@@ -6,12 +6,12 @@ import {PlayerO} from './components/PlayerO';
 function App() {
   const [player, setPlayer] = useState(true)
 
-  useEffect(()=>{
-    if (player ===true) {
-      console.log ("true APP")
-    }
-    else {console.log("false APP")}
-},[player]);
+//   useEffect(()=>{
+//     if (player ===true) {
+//       console.log ("true APP")
+//     }
+//     else {console.log("false APP")}
+// },[player]);
 
 
   return (
