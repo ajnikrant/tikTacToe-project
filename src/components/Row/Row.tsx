@@ -3,7 +3,7 @@ import { Cell } from '../Cell';
 
 export function Row() {
   return (
-    <div className='flex flex-row'>
+    <div className='flex flex-row justify-center'>
         <Cell />
         <Cell />
         <Cell />

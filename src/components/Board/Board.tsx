@@ -11,12 +11,12 @@ export function Board() {
     // }
 
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col border border-solid justify-center'>
         <h2>THIS IS THE BOARD</h2>
         {/* <div>{ rowMapper(3) }</div> */}
-        <div><Row /></div>
-        <div><Row /></div>
-        <div><Row /></div>
+        <Row />
+        <Row />
+        <Row />
     </div>
   );
 }
