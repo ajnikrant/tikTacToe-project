@@ -6,10 +6,12 @@ const [cellColor, setCellColor] = useState (true)
 const [playerMark, setPlayerMark] = useState (" ")
 
   function handleCellClick(cellColor:boolean){
-    setCellColor(cellColor => !cellColor)
-
-    setPlayer(player => !player)
-    handlePlayerChoice(player)
+    
+    if (playerMark === " ") {
+      setPlayer(player => !player)
+      setCellColor(cellColor => !cellColor)
+      handlePlayerChoice(player)
+    }
   }
 
   function handlePlayerChoice(player){
