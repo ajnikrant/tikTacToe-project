@@ -18,37 +18,32 @@ function App() {
   function checkWinStatus(cellIndex:number, rowIndex:number){
     //if straight up and down 
     if (playingBoard[rowIndex][0] === playingBoard[rowIndex][1] && playingBoard[rowIndex][0] === playingBoard[rowIndex][2] ){
-      setPlayingBoard([['','',''],['','',''],['','','']])
       setVictory(true)
     }
     //if straight left to right
     else if (playingBoard[0][cellIndex] === playingBoard[1][cellIndex] && playingBoard[0][cellIndex] === playingBoard[2][cellIndex] ){
-      setPlayingBoard([['','',''],['','',''],['','','']])
       setVictory(true)
     }
     //if diagonal one way
     else if (playingBoard[0][0] === playingBoard[1][1] && playingBoard[0][0] === playingBoard[2][2] ){
     // else if (playingBoard[rowIndex-1][0] === playingBoard[rowIndex][1] && playingBoard[rowIndex-1][0] === playingBoard[rowIndex+1][2] ){
       if (playingBoard[1][1] !== ''){
-        setPlayingBoard([['','',''],['','',''],['','','']])
         setVictory(true)
       }
     }
     //if diagonal other way
     else if (playingBoard[2][0] === playingBoard[1][1] && playingBoard[2][0] === playingBoard[0][2] ){
       if (playingBoard[1][1] !== ''){
-        setPlayingBoard([['','',''],['','',''],['','','']])
         setVictory(true)  
       }
     }
   }  
 
-  const winningTextBox = (
-  <div>
-    <div className='bg-black opacity-50'> </div>
-    <h1 className='absolute flex justify-center items-center bg-lime-600 p-12'>Congrats, Player {player === "X" ? "O" : "X"}, You won!</h1>
-  </div>
-  )
+  function handlePlayAgain(){
+    setPlayingBoard([['','',''],['','',''],['','','']])
+    setVictory(false)
+  }
+
   return (
     <div className='flex justify-center pt-14 space-x-8'>
       <div className={player === "O" ? 'border mr-8 border-solid': 'border mr-8 border-solid bg-green-600' } >
@@ -71,7 +66,11 @@ function App() {
           <div className={player === "X" ?  'border border-solid': 'border border-solid bg-green-600'}>
             <h2>PLAYER O</h2>
           </div>
-          {victory ? <h1 className='absolute flex justify-center items-center bg-amber-200 drop-shadow-2xl drop-shadow-amber-500 rounded-xl p-12'>Congrats, Player {player === "X" ? "O" : "X"}, You won!</h1> : null}
+          {victory ? <div className='absolute flex flex-col justify-center items-center bg-amber-200 shadow-2xl shadow-yellow-200 rounded-xl p-12 space-y-4'>
+                        <h1> Congrats Player {player === "X" ? "O" : "X"}, You won!</h1> 
+                        <button onClick={handlePlayAgain} className='h-4 bg-blue-600 text-xs p-2 shadow-md shadow-blue-400 rounded-xl hover:bg-blue-500'> <p className='-mt-2'>Play Again</p></button>
+                      </div>
+                        : null}
     </div>
   );
 }
