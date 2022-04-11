@@ -44,17 +44,24 @@ function App() {
     const winnerX = (cell:string) => cell === "X"
     const winnerO = (cell:string) => cell === "O"
 
+    let copy = [['','',''],['','',''],['','','']]
+
     for(let i = 0; i < playingBoard.length; i++) {
       let logicX= playingBoard[i].every(winnerX)
       let logicO= playingBoard[i].every(winnerO)
       if (logicX || logicO){ setVictory(true) }
-
-      for(let j = 0; j < playingBoard[i].length; j++) {
-        if (playingBoard[i][j] !== '' && playingBoard[i][j]=== playingBoard[i+1][j] && playingBoard[i][j]=== playingBoard[i+2][j]){
-          setVictory(true)
-        }        
+     }
+    for (let i=0; i<copy.length; i++){
+      for(let j=0; j<copy[i].length; j++){
+        copy[i][j] = playingBoard[j][i]
       }
-   }
+    }
+    for(let i = 0; i < copy.length; i++) {
+      let logicX= copy[i].every(winnerX)
+      let logicO= copy[i].every(winnerO)
+      if (logicX || logicO){ setVictory(true) }
+    }
+
   }
 
   function handlePlayAgain(){
