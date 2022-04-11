@@ -12,7 +12,6 @@ function App() {
         setPlayingBoard(b)
         player === "X" ? setPlayer("O") : setPlayer("X")
       };
-      // checkWinStatus(cellIndex, rowIndex)
       declareWinner()
   }
 
@@ -44,25 +43,18 @@ function App() {
 
     const winnerX = (cell:string) => cell === "X"
     const winnerO = (cell:string) => cell === "O"
-    let cellObj = {}
 
-    playingBoard.map((row, rowIndex) => {
-      let logicX= row.every(winnerX)
-      let logicO= row.every(winnerO)
-      if (logicX || logicO === true){
-        setVictory(true)  
+    for(let i = 0; i < playingBoard.length; i++) {
+      let logicX= playingBoard[i].every(winnerX)
+      let logicO= playingBoard[i].every(winnerO)
+      if (logicX || logicO){ setVictory(true) }
+
+      for(let j = 0; j < playingBoard[i].length; j++) {
+        if (playingBoard[i][j] !== '' && playingBoard[i][j]=== playingBoard[i+1][j] && playingBoard[i][j]=== playingBoard[i+2][j]){
+          setVictory(true)
+        }        
       }
-        // if (playingBoard[rowIndex][cellIndex] !== ''){
-          for(let i=0; i<row.length; i++){
-            if (playingBoard[i][i] !== '' && playingBoard[i][i] === playingBoard[i-1][i] && playingBoard[i][i] === playingBoard[i+1][i]){
-              setVictory(true)  
-            }
-
-          }
-
-        // }
-        // console.log(rowIndex, cell)
-    })
+   }
   }
 
   function handlePlayAgain(){
