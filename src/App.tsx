@@ -12,36 +12,63 @@ function App() {
         setPlayingBoard(b)
         player === "X" ? setPlayer("O") : setPlayer("X")
       };
-      checkWinStatus(cellIndex, rowIndex)
+      // checkWinStatus(cellIndex, rowIndex)
+      declareWinner()
   }
 
-  function checkWinStatus(cellIndex:number, rowIndex:number){
-    //if straight up and down 
-    if (playingBoard[rowIndex][0] === playingBoard[rowIndex][1] && playingBoard[rowIndex][0] === playingBoard[rowIndex][2] ){
-      setVictory(true)
-    }
-    //if straight left to right
-    else if (playingBoard[0][cellIndex] === playingBoard[1][cellIndex] && playingBoard[0][cellIndex] === playingBoard[2][cellIndex] ){
-      setVictory(true)
-    }
-    //if diagonal one way
-    else if (playingBoard[0][0] === playingBoard[1][1] && playingBoard[0][0] === playingBoard[2][2] ){
-    // else if (playingBoard[rowIndex-1][0] === playingBoard[rowIndex][1] && playingBoard[rowIndex-1][0] === playingBoard[rowIndex+1][2] ){
-      if (playingBoard[1][1] !== ''){
-        setVictory(true)
-      }
-    }
-    //if diagonal other way
-    else if (playingBoard[2][0] === playingBoard[1][1] && playingBoard[2][0] === playingBoard[0][2] ){
-      if (playingBoard[1][1] !== ''){
+  // function checkWinStatus(cellIndex:number, rowIndex:number){
+  //   //if straight up and down 
+  //   if (playingBoard[rowIndex][0] === playingBoard[rowIndex][1] && playingBoard[rowIndex][0] === playingBoard[rowIndex][2] ){
+  //     setVictory(true)
+  //   }
+  //   //if straight left to right
+  //   else if (playingBoard[0][cellIndex] === playingBoard[1][cellIndex] && playingBoard[0][cellIndex] === playingBoard[2][cellIndex] ){
+  //     setVictory(true)
+  //   }
+  //   //if diagonal one way
+  //   else if (playingBoard[0][0] === playingBoard[1][1] && playingBoard[0][0] === playingBoard[2][2] ){
+  //   // else if (playingBoard[rowIndex-1][0] === playingBoard[rowIndex][1] && playingBoard[rowIndex-1][0] === playingBoard[rowIndex+1][2] ){
+  //     if (playingBoard[1][1] !== ''){
+  //       setVictory(true)
+  //     }
+  //   }
+  //   //if diagonal other way
+  //   else if (playingBoard[2][0] === playingBoard[1][1] && playingBoard[2][0] === playingBoard[0][2] ){
+  //     if (playingBoard[1][1] !== ''){
+  //       setVictory(true)  
+  //     }
+  //   }
+  // }  
+
+  function declareWinner(){
+
+    const winnerX = (cell:string) => cell === "X"
+    const winnerO = (cell:string) => cell === "O"
+    let cellObj = {}
+
+    playingBoard.map((row, rowIndex) => {
+      let logicX= row.every(winnerX)
+      let logicO= row.every(winnerO)
+      if (logicX || logicO === true){
         setVictory(true)  
       }
-    }
-  }  
+        // if (playingBoard[rowIndex][cellIndex] !== ''){
+          for(let i=0; i<row.length; i++){
+            if (playingBoard[i][i] !== '' && playingBoard[i][i] === playingBoard[i-1][i] && playingBoard[i][i] === playingBoard[i+1][i]){
+              setVictory(true)  
+            }
+
+          }
+
+        // }
+        // console.log(rowIndex, cell)
+    })
+  }
 
   function handlePlayAgain(){
     setPlayingBoard([['','',''],['','',''],['','','']])
     setVictory(false)
+    setPlayer("X")
   }
 
   return (
@@ -57,6 +84,7 @@ function App() {
               return (
                 <div className="h-14 w-14 border border-solid flex justify-center items-center cursor-pointer -ml-8" onClick={() => handleClick(cellIndex, rowIndex)} key={cellIndex}>
                   {cell}
+                  {/* {rowIndex} {cellIndex}  */}
                 </div>
               )
             })}
@@ -66,9 +94,9 @@ function App() {
           <div className={player === "X" ?  'border border-solid': 'border border-solid bg-green-600'}>
             <h2>PLAYER O</h2>
           </div>
-          {victory ? <div className='absolute flex flex-col justify-center items-center bg-amber-200 shadow-2xl shadow-yellow-200 rounded-xl p-12 space-y-4'>
+          {victory ? <div className='absolute flex flex-col justify-center items-center bg-amber-200 shadow-sm shadow-yellow-100 rounded-xl p-12 space-y-4'>
                         <h1> Congrats Player {player === "X" ? "O" : "X"}, You won!</h1> 
-                        <button onClick={handlePlayAgain} className='h-4 bg-blue-600 text-xs p-2 shadow-md shadow-blue-400 rounded-xl hover:bg-blue-500'> <p className='-mt-2'>Play Again</p></button>
+                        <button onClick={handlePlayAgain} className='h-4 bg-blue-600 text-xs p-2 rounded-xl hover:bg-blue-500'> <p className='-mt-2'>Play Again</p></button>
                       </div>
                         : null}
     </div>
