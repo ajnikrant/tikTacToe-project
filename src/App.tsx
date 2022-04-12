@@ -15,29 +15,6 @@ function App() {
       declareWinner()
   }
 
-  // function checkWinStatus(cellIndex:number, rowIndex:number){
-  //   //if straight up and down 
-  //   if (playingBoard[rowIndex][0] === playingBoard[rowIndex][1] && playingBoard[rowIndex][0] === playingBoard[rowIndex][2] ){
-  //     setVictory(true)
-  //   }
-  //   //if straight left to right
-  //   else if (playingBoard[0][cellIndex] === playingBoard[1][cellIndex] && playingBoard[0][cellIndex] === playingBoard[2][cellIndex] ){
-  //     setVictory(true)
-  //   }
-  //   //if diagonal one way
-  //   else if (playingBoard[0][0] === playingBoard[1][1] && playingBoard[0][0] === playingBoard[2][2] ){
-  //   // else if (playingBoard[rowIndex-1][0] === playingBoard[rowIndex][1] && playingBoard[rowIndex-1][0] === playingBoard[rowIndex+1][2] ){
-  //     if (playingBoard[1][1] !== ''){
-  //       setVictory(true)
-  //     }
-  //   }
-  //   //if diagonal other way
-  //   else if (playingBoard[2][0] === playingBoard[1][1] && playingBoard[2][0] === playingBoard[0][2] ){
-  //     if (playingBoard[1][1] !== ''){
-  //       setVictory(true)  
-  //     }
-  //   }
-  // }  
 
   function declareWinner(){
 
