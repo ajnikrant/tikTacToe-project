@@ -23,22 +23,40 @@ function App() {
 
     let copy = [['','',''],['','',''],['','','']]
 
+    //loop over first dimension of playingboard
+    //vertical win logic
     for(let i = 0; i < playingBoard.length; i++) {
       let logicX= playingBoard[i].every(winnerX)
       let logicO= playingBoard[i].every(winnerO)
       if (logicX || logicO){ setVictory(true) }
      }
+    //transpose playingboard into copy
     for (let i=0; i<copy.length; i++){
       for(let j=0; j<copy[i].length; j++){
         copy[i][j] = playingBoard[j][i]
       }
     }
+    //loop over first dimension of copy 
+    //horizontal win logic
     for(let i = 0; i < copy.length; i++) {
       let logicX= copy[i].every(winnerX)
       let logicO= copy[i].every(winnerO)
       if (logicX || logicO){ setVictory(true) }
     }
 
+    //diagonal win logic  
+    
+    playingBoard.map((row, rowIndex) => (
+      row.map((cell, cellIndex) => {
+        if (playingBoard[rowIndex][cellIndex] !== '' && playingBoard[rowIndex][cellIndex] === playingBoard[rowIndex+1][cellIndex+1] && playingBoard[rowIndex][cellIndex] === playingBoard[rowIndex+2][cellIndex+2]){
+           setVictory(true)
+          // console.log("DIAG")
+         }
+         else if (playingBoard[rowIndex][cellIndex] !== '' && playingBoard[rowIndex][cellIndex] === playingBoard[rowIndex+1][cellIndex-1] && playingBoard[rowIndex][cellIndex] === playingBoard[rowIndex+2][cellIndex-2]){
+          setVictory(true)
+         }
+      }) 
+     ))
   }
 
   function handlePlayAgain(){
@@ -60,7 +78,6 @@ function App() {
               return (
                 <div className="h-14 w-14 border border-solid flex justify-center items-center cursor-pointer -ml-8" onClick={() => handleClick(cellIndex, rowIndex)} key={cellIndex}>
                   {cell}
-                  {/* {rowIndex} {cellIndex}  */}
                 </div>
               )
             })}
